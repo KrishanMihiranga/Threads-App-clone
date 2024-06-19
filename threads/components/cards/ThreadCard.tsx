@@ -10,7 +10,7 @@ interface Props {
         name: string;
         image: string;
         id: string;
-    },
+    };
     community: {
         id: string;
         name: string;
@@ -20,11 +20,10 @@ interface Props {
     comments: {
         author: {
             image: string;
-        }
-    }[]
-    iscomment?: boolean;
+        };
+    }[];
+    isComment?: boolean;
 }
-
 const ThreadCard = ({
     id,
     currentUserId,
@@ -33,11 +32,11 @@ const ThreadCard = ({
     author,
     community,
     createdAt,
-    comments,
-    iscomment,
+    comments = [],
+    isComment,
 }: Props) => {
     return (
-        <article className="flex w-full flex-col rounded-xl bg-dark-2 p-7">
+        <article className={`flex w-full flex-col rounded-xl ${isComment ? 'px-0 xs:px-7' : 'bg-dark-2 p-7'} `}>
             <div className="fleex items-start justify-between">
                 <div className="flex w-full flex-1 flex-row gap-4">
                     <div className="flex flex-col items-center">
@@ -66,7 +65,7 @@ const ThreadCard = ({
                                 <Image src="/assets/repost.svg" alt="repost" width={24} height={24} className="cursor-pointer object-contain" />
                                 <Image src="/assets/share.svg" alt="share" width={24} height={24} className="cursor-pointer object-contain" />
                             </div>
-                            {iscomment && comments.length > 0 && (
+                            {isComment && comments.length > 0 && (
                                 <Link href={`/thread/${id}`}>
                                     <p className="mt-1 text-subtle-medium text-gray-1">{comments.length} replies</p>
                                 </Link>
